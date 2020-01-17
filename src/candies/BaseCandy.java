@@ -6,11 +6,13 @@ public abstract class BaseCandy {
     int price;
     String unic;
 
+
+
     BaseCandy(String name, int weight, int price, String unic) {
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.unic = unic;
-        Box.items.add(this);
+        Box.box.add(this);
     }
 }
