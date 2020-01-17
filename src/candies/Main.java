@@ -8,7 +8,7 @@ public class Main {
         JellyBean jellyBean2 = new JellyBean("Row", 45, 45, "Talented");
         JellyBean jellyBean3 = new JellyBean("Milka", 70, 45, "Bought");
         MolodeznieBaldeznie molodeznieBaldeznie = new MolodeznieBaldeznie("Maya", 1, 50, "Following");
-        Nesquik nesquik = new Nesquik("Trim",34,65,"Tasty");
+        Nesquik nesquik = new Nesquik("Trim", 34, 65, "Tasty");
 
 
 //        System.out.println("boxPrice:" + jellyBean.boxPrice());
@@ -29,6 +29,8 @@ public class Main {
 //        molodeznieBaldeznie.aboutAllCandies();
         System.out.println("================\nALL CANDIES\n");
         molodeznieBaldeznie.aboutAllCandies();
+        System.out.println("================\nGETTING BOX WEIGHT\n");
+        System.out.println(molodeznieBaldeznie.getBoxWeight());
         jellyBean.reduceWeight();
         System.out.println("================\nREDUSED\n");
         molodeznieBaldeznie.aboutAllCandies();

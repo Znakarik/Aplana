@@ -6,6 +6,8 @@ import java.util.Collections;
 public interface Box {
     int MAX_CANDY_SIZE = 50;
     int MAX_BOX_SIZE = 300;
+    int MAX_BOX_PRICE = 400;
+    int MAX_CANDY_PRICE = 50;
     ArrayList<BaseCandy> box = new ArrayList<>();
 
     BaseCandy newCandy(String name, int weight, int price, String unic);
@@ -45,9 +47,17 @@ public interface Box {
     }
 
     default void reduceWeight() {
-        if (boxPrice() > MAX_BOX_SIZE) {
+        if (getBoxWeight() > MAX_BOX_SIZE) {
             for (int i = 0; i < box.size(); i++) {
                 if (box.get(i).weight > MAX_CANDY_SIZE) {
+                    deleteCandy(i);
+                }
+            }
+        }
+    }default void reducePrice() {
+        if (boxPrice() > MAX_BOX_PRICE) {
+            for (int i = 0; i < box.size(); i++) {
+                if (box.get(i).price > MAX_CANDY_PRICE) {
                     deleteCandy(i);
                 }
             }
