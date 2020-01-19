@@ -11,33 +11,5 @@ public class Main {
         Nesquik nesquik = new Nesquik("Trim", 34, 65, "Tasty");
 
 
-//        System.out.println("boxPrice:" + jellyBean.boxPrice());
-//        System.out.println("BoxWeight:" + jellyBean.getBoxWeight());
-//        System.out.println("================\nABOUT jellyBean\n");
-//        jellyBean.aboutAllCandies();
-//        jellyBean.deleteLastCandy();
-
-//        jellyBean.deleteCandy(0);
-//        System.out.println("================\nABOUT molodeznieBaldeznie\n");
-
-//        molodeznieBaldeznie.aboutAllCandies();
-
-//        molodeznieBaldeznie.deleteLastCandy();
-//        System.out.println("================\nThere shouldn't be any candies\n");
-//        molodeznieBaldeznie.aboutAllCandies();
-
-//        molodeznieBaldeznie.aboutAllCandies();
-        System.out.println("================\nALL CANDIES\n");
-        molodeznieBaldeznie.aboutAllCandies();
-        System.out.println("================\nGETTING BOX WEIGHT\n");
-        System.out.println(molodeznieBaldeznie.getBoxWeight());
-        jellyBean.reduceWeight();
-        System.out.println("================\nREDUSED\n");
-        molodeznieBaldeznie.aboutAllCandies();
-        System.out.println("================\nTRYING TO DELETE THE BIGGEST CANDY WITH INDEX\n");
-        molodeznieBaldeznie.deleteCandy(1);
-        molodeznieBaldeznie.aboutAllCandies();
-
-
     }
 }
