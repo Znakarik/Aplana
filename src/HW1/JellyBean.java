@@ -1,4 +1,4 @@
-package candies;
+package HW1;
 
 public class JellyBean extends BaseCandy implements Box {
 

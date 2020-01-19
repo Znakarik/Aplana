@@ -1,4 +1,4 @@
-package candies;
+package HW1;
 
 public abstract class BaseCandy {
     String name;

@@ -1,4 +1,4 @@
-package candies;
+package HW1;
 
 public class MolodeznieBaldeznie extends BaseCandy implements Box {
 

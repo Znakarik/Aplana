@@ -1,14 +1,12 @@
-package candies;
+package HW1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
 public interface Box {
     int MAX_BOX_SIZE = 20;
-    int MAX_BOX_PRICE = 400;
-    int MAX_CANDY_PRICE = 50;
+    int MAX_BOX_PRICE = 20;
     ArrayList<BaseCandy> box = new ArrayList<>();
 
     default void deleteCandy(int index) {
