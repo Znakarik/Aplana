@@ -6,6 +6,14 @@ public abstract class BaseCandy {
     int price;
     String unic;
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
     BaseCandy(String name, int weight, int price, String unic) {
         this.name = name;
         this.weight = weight;

@@ -1,11 +1,12 @@
 package candies;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 public interface Box {
-    int MAX_CANDY_SIZE = 50;
-    int MAX_BOX_SIZE = 300;
+    int MAX_BOX_SIZE = 20;
     int MAX_BOX_PRICE = 400;
     int MAX_CANDY_PRICE = 50;
     ArrayList<BaseCandy> box = new ArrayList<>();
@@ -29,6 +30,7 @@ public interface Box {
         for (int i = 0; i < box.size(); i++) {
             boxWeight = boxWeight + box.get(i).weight;
         }
+        System.out.println("BOX WEIGHT: " + boxWeight);
         return boxWeight;
     }
 
@@ -48,23 +50,24 @@ public interface Box {
     }
 
     default void reduceWeight() {
-        BaseCandy tmp;
-        if (getBoxWeight() > MAX_BOX_SIZE) {
+        box.sort(Comparator.comparing(BaseCandy::getWeight));
+        Collections.reverse(box);
+        while (getBoxWeight() > MAX_BOX_SIZE) {
+            System.err.println("Your box is too heavy!");
+            System.err.println("Deleting...\n ");
+            deleteLastCandy();
+        }
+    }
 
+    default void reducePrice() {
+        box.sort(Comparator.comparing(BaseCandy::getPrice));
+        Collections.reverse(box);
+        if (boxPrice() > MAX_BOX_PRICE) {
+            System.err.println("Your box is too expensive");
+            System.err.println("Deleting...\n");
+            deleteLastCandy();
+        }
     }
 }
-    }
 
-            }
-
-default void reducePrice(){
-        if(boxPrice()>MAX_BOX_PRICE){
-        for(int i=0;i<box.size();i++){
-        if(box.get(i).price>MAX_CANDY_PRICE){
-        deleteCandy(i);
-        }
-        }
-        }
-        }
-        }
 
