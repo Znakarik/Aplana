@@ -10,16 +10,16 @@ public interface Box {
     int MAX_CANDY_PRICE = 50;
     ArrayList<BaseCandy> box = new ArrayList<>();
 
-    BaseCandy newCandy(String name, int weight, int price, String unic);
-
     default void deleteCandy(int index) {
         for (int i = 0; i < box.size(); i++) {
-            box.remove(index);
+            if (index == i) {
+                box.remove(index);
+            }
         }
     }
 
     default void deleteLastCandy() {
-        for (int i = 0; i < box.size(); i++) {
+        for (int i = box.size() - 1; i < box.size(); i++) {
             box.remove(box.size() - 1);
         }
     }
@@ -37,6 +37,7 @@ public interface Box {
         for (int i = 0; i < box.size(); i++) {
             boxPrice = boxPrice + box.get(i).price;
         }
+        System.out.println("BOX PRICE: " + boxPrice);
         return boxPrice;
     }
 
@@ -47,21 +48,23 @@ public interface Box {
     }
 
     default void reduceWeight() {
+        BaseCandy tmp;
         if (getBoxWeight() > MAX_BOX_SIZE) {
-            for (int i = 0; i < box.size(); i++) {
-                if (box.get(i).weight > MAX_CANDY_SIZE) {
-                    deleteCandy(i);
-                }
-            }
-        }
-    }default void reducePrice() {
-        if (boxPrice() > MAX_BOX_PRICE) {
-            for (int i = 0; i < box.size(); i++) {
-                if (box.get(i).price > MAX_CANDY_PRICE) {
-                    deleteCandy(i);
-                }
-            }
-        }
+
     }
 }
+    }
+
+            }
+
+default void reducePrice(){
+        if(boxPrice()>MAX_BOX_PRICE){
+        for(int i=0;i<box.size();i++){
+        if(box.get(i).price>MAX_CANDY_PRICE){
+        deleteCandy(i);
+        }
+        }
+        }
+        }
+        }
 

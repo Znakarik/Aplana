@@ -3,13 +3,13 @@ package candies;
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
-        JellyBean jellyBean = new JellyBean("Cow", 1000, 50, "Big");
-        JellyBean jellyBean4 = new JellyBean("Rabbit", 30, 50, "Small");
-        JellyBean jellyBean2 = new JellyBean("Row", 45, 45, "Talented");
-        JellyBean jellyBean3 = new JellyBean("Milka", 70, 45, "Bought");
-        MolodeznieBaldeznie molodeznieBaldeznie = new MolodeznieBaldeznie("Maya", 1, 50, "Following");
-        Nesquik nesquik = new Nesquik("Trim", 34, 65, "Tasty");
+        JellyBean jellyBean = JellyBean.getInstance("Iriska", 5, 10, "Tasty");
+        MolodeznieBaldeznie molodeznieBaldeznie = MolodeznieBaldeznie.getInstance("Cow", 5, 10, "First candy on the planet");
+        Nesquik nesquik = Nesquik.getInstance("Lovely", 10, 10, "HippoAllergic");
 
+        jellyBean.aboutAllCandies();
+        System.out.println("==================");
+        jellyBean.boxPrice();
 
     }
 }

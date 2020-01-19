@@ -6,8 +6,6 @@ public abstract class BaseCandy {
     int price;
     String unic;
 
-
-
     BaseCandy(String name, int weight, int price, String unic) {
         this.name = name;
         this.weight = weight;
