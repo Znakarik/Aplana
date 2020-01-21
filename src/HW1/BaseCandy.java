@@ -1,16 +1,16 @@
 package HW1;
 
-public abstract class BaseCandy {
+abstract class BaseCandy {
     String name;
     int weight;
     int price;
     String unic;
 
-    public int getWeight() {
+    int getWeight() {
         return weight;
     }
 
-    public int getPrice() {
+    int getPrice() {
         return price;
     }
 

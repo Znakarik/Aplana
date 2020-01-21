@@ -34,8 +34,8 @@ public interface Box {
 
     default int boxPrice() {
         int boxPrice = 0;
-        for (int i = 0; i < box.size(); i++) {
-            boxPrice = boxPrice + box.get(i).price;
+        for (BaseCandy baseCandy : box) {
+            boxPrice = boxPrice + baseCandy.price;
         }
         System.out.println("BOX PRICE: " + boxPrice);
         return boxPrice;

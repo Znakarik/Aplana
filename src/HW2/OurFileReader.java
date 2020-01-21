@@ -6,28 +6,26 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class OurFileReader {
+    private static File file = new File("./src/HW2/res/file");
+    private static File file1 = new File("./src/HW2/res/text");
+    private static File file2 = new File("./src/HW2/res/file2");
 
-//    static void printAll(Map<String, Integer> map) {
-//        for (Map.Entry<String, Integer> a : map.entrySet()) {
-//            System.out.println("KEY: " + a.getKey() + " | COUNT: " + a.getValue());
-//            System.out.println("____________");
-//        }
-//    }
-
-    static String[] makeArr(File file) throws IOException {
+    private static void count(File file) throws IOException {
         Scanner scanner = new Scanner(Paths.get(file.toString()), StandardCharsets.UTF_8.name());
-        // Прочитали файл целиком
+
         String data = scanner.useDelimiter("\\A").next();
-        String string = data.replaceAll("/", "")
+
+        String string = data
+                .replaceAll("\\p{Punct}+", "")  // Тил
                 .replaceAll("\\)", "")
                 .replaceAll("\\(", "")
+//                .replaceAll("\\s", " ")
                 .replaceAll("\\{", "")
                 .replaceAll("}", "")
                 .replaceAll("—", "")
                 .replaceAll("'?'", "")
                 .replaceAll(",", "")
                 .replaceAll("%", "")   // Процент
-//                .replaceAll(" ", "")   // Пробел
                 .replaceAll("\t", "")  // Табуляция (заменяем на пробел)
                 .replaceAll("\n", "")  // Переход строки (заменяем на пробел)
                 .replaceAll("\r", "")  // Возврат каретки (заменяем на пробел)
@@ -54,67 +52,65 @@ public class OurFileReader {
                 .replaceAll("@", "")   // At sign, по цене, собачка
                 .replaceAll("\\[", "") // Открывающаяся квадратная скобка
                 .replaceAll("\\\\", "") // Одиночный обратный слеш '\'
-                .replaceAll("\\]", "") // Закрывающаяся квадратная скобка
+                .replaceAll("]", "") // Закрывающаяся квадратная скобка
                 .replaceAll("\\^", "") // Циркумфлекс
                 .replaceAll("_", "")   // Нижнее подчеркивание
                 .replaceAll("`", "")   // Гравис
                 .replaceAll("\\{", "") // Открывающаяся фигурная скобка
                 .replaceAll("\\|", "") // Вертикальная черта
-                .replaceAll("\\}", "") // Закрывающаяся фигурная скобка
+                .replaceAll("}", "") // Закрывающаяся фигурная скобка
                 .toLowerCase()
-                .trim()
-                .replaceAll("~", "");  // Тил
+                .replaceAll("\\s+", " ")
+                .replaceAll("~", "")
+                .trim();
 
         scanner.close();
-        // Положили весь текст в массив по слову
-        return string.split(" ");
-    }
 
-    static void count() throws IOException {
-        //Итерируемся и смотим сколько раз встречалось
+
+        String[] strings = string.split(" ");
         Map<String, Integer> map = new HashMap<>();
-        // Сортируем наш список по алфавиту
-        String[] strings = makeArr(new File("/Users/o/IdeaProjects/Aplana/src/HW2/res/file2"));
+
         Arrays.sort(strings);
         for (String s : strings) {
-            map.put(s, map.containsKey(s) ? map.get(s) + 1 : 1);
+            if (map.containsKey(s)) {
+                map.put(s, map.get(s) + 1);
+            } else {
+                map.put(s, 1);
+            }
         }
-
         int max = Collections.max(map.values());
         String maxString = "";
-        for (Iterator<Map.Entry<String, Integer>> it = map.entrySet().iterator(); it.hasNext(); ) {
-            Map.Entry<String, Integer> entry = it.next();
-            if (entry.getKey().equals("\t")) {
-                it.remove();
-            }
-            if (entry.getValue().equals(max)) {
-                maxString = entry.getKey();
+
+        for (Map.Entry<String, Integer> a : map.entrySet()) {
+            if (a.getValue().equals(max)) {
+                maxString = a.getKey();
             }
         }
-//        for (Map.Entry<String, Integer> a : map.entrySet()) {
-//            if (a.getKey().equals("")) {
-//                map.remove(a);
-//            }
-//            if (a.getValue().equals(max)) {
-//                maxString = a.getKey();
-//            }
-//        }
 
         System.out.printf("MAX STRING: %s \nREPEATED %d" +
                 "\n________\n", maxString, max);
 
-        //Просто печатаем все значения
-//        map.entrySet().stream()
-//                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-//                .forEach(System.out::println);
-
+        map.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(System.out::println);
     }
 
-
     public static void main(String[] args) throws IOException {
-//        File file = new File("/Users/o/IdeaProjects/Aplana/src/HW2/res/file");
-//        File file1 = new File("/Users/o/IdeaProjects/Aplana/src/HW2/res/text");
-        count();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введите число от 1 до 3");
+        int num = Integer.parseInt(reader.readLine());
+        switch (num) {
+            case 1:
+                count(file);
+                break;
+            case 2:
+                count(file1);
+                break;
+            case 3:
+                count(file2);
+                break;
+        }
     }
 }
 

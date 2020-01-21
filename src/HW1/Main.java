@@ -16,7 +16,9 @@ public class Main {
 //        jellyBean.aboutAllCandies();
 //        System.out.println("==================");
         System.out.println("==================");
+        jellyBean.aboutAllCandies();
         jellyBean.reducePrice();
         jellyBean.aboutAllCandies();
+        jellyBean.boxPrice();
     }
 }
