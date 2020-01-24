@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class OurFileReader {
-    private static File file = new File("./src/HW2/res/file");
-    private static File file1 = new File("./src/HW2/res/text");
-    private static File file2 = new File("./src/HW2/res/file2");
+    private static File file = new File("./src/HW2/organization/file");
+    private static File file1 = new File("./src/HW2/organization/text");
+    private static File file2 = new File("./src/HW2/organization/file2");
 
     private static void count(File file) throws IOException {
         Scanner scanner = new Scanner(Paths.get(file.toString()), StandardCharsets.UTF_8.name());
