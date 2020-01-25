@@ -18,7 +18,8 @@ public class SberTest {
     @BeforeClass
     public static void TestUp() {
 
-        System.setProperty("webdriver.chrome.driver", "./driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver");
+
         webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         webDriver.manage().window().maximize();
