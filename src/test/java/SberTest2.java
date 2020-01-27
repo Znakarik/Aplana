@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public class SberTest2 {
 
     static WebDriver webDriver = null;
-    static Actions action;
 
     @BeforeClass
     public static void TestUp() {
