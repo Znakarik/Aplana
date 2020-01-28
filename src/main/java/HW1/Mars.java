@@ -13,7 +13,6 @@ public class Mars extends BaseCandy implements Box {
         return new Mars(name, weight, price,generateUnic());
     }
 
-
     private static String generateUnic() {
         String[] words = {"Jupiter", "Venus", "Earth", "Saturn", "Uranus"};
         int num = (int) (Math.random() * words.length);
