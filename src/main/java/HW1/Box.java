@@ -1,5 +1,7 @@
 package HW1;
 
+import HW1.model.BaseCandy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,7 +45,7 @@ public interface Box {
 
     default void aboutAllCandies() {
         for (BaseCandy item : box) {
-            System.out.printf("NAME: %s, WEIGHT: %s, PRICE: %s, INF: %s\n", item.name, item.weight, item.price, item.unic);
+            System.out.printf("NAME: %s, WEIGHT: %s, PRICE: %s, UNIC: %s\n", item.name, item.weight, item.price, item.unic);
         }
     }
 
@@ -61,7 +63,7 @@ public interface Box {
         box.sort(Comparator.comparing(BaseCandy::getPrice));
         Collections.reverse(box);
         if (boxPrice() > MAX_BOX_PRICE) {
-            System.err.println("Your box is too expensive");
+            System.err.println("Your box is too expensive\n");
             System.err.println("Deleting...\n");
             deleteLastCandy();
         }
