@@ -59,7 +59,7 @@ replacement — строка, которая заменит найденное �
 Пример
 import java.io.*;
 
-public class Test{
+public class TestTest{
    public static void main(String args[]){
       String Str = new String("Добро пожаловать на ProgLang.su");
 
@@ -173,7 +173,7 @@ char a = 'a';         // Переменной a типа char присваива
 Пример
 «age» — локальная переменная, определяется внутри метода «pupAge()» и области её действия ограничивается только этим методом.
 
-public class Test{
+public class TestTest{
    public void pupAge(){
       int age = 0;
       age = age + 7;
@@ -181,7 +181,7 @@ public class Test{
    }
 
    public static void main(String args[]){
-      Test test = new Test();
+      TestTest test = new TestTest();
       test.pupAge();
    }
 }
@@ -191,7 +191,7 @@ public class Test{
 Пример без инициализации
 Пример использования «age» без инициализации. Программа выдаст ошибку во время компиляции.
 
-public class Test{
+public class TestTest{
    public void pupAge(){
       int age;
       age = age + 7;
@@ -199,7 +199,7 @@ public class Test{
    }
 
    public static void main(String args[]){
-      Test test = new Test();
+      TestTest test = new TestTest();
       test.pupAge();
    }
 }
@@ -207,7 +207,7 @@ public class Test{
 
 Это приведёт к следующему сообщению об ошибке во время компиляции:
 
-Test.java:4:variable number might not have been initialized
+TestTest.java:4:variable number might not have been initialized
 age = age + 7;
          ^
 1 error

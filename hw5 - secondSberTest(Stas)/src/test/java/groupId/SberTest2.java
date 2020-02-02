@@ -1,4 +1,4 @@
-package groupId;
+package test.java.groupId;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
