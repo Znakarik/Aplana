@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.junit.BeforeClass;
 
@@ -7,7 +8,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    protected  static WebDriver driver;
+    protected static WebDriver driver;
     protected static String baseUrl;
     public static Properties properties = TestProperties.getInstance().getProperties();
 

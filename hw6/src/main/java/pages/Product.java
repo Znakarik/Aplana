@@ -1,37 +1,39 @@
 package pages;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Product {
 
-    static List<Product> productList = new ArrayList<>();
+    private Integer price;
+    private Integer guarantee;
+    private String name;
 
-    public Integer getPrice() {
-        return price;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(price, product.price) &&
+                Objects.equals(name, product.name);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, name);
     }
-
-    Integer price;
-    String name;
 
     public Product(Integer price, String name) {
         this.price = price;
         this.name = name;
-        productList.add(this);
     }
 
-    public static void getProductList(){
-        System.out.println(Product.productList.toString());
-    }
     @Override
     public String toString() {
         return "Product{" +
