@@ -15,6 +15,7 @@
         <module>hw4 - firstSberTest (Alex)</module>
         <module>hw5 - secondSberTest(Stas)</module>
         <module>hw6_PageObject</module>
+        <module>hw7-soapTesting</module>
     </modules>
 
     <dependencies>
