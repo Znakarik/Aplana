@@ -16,6 +16,7 @@ public class BasketPage extends BasePage {
 
     @FindBy(xpath = "//div[contains(@class,'cart-items__products')]//span[contains(@class,'price__current')]")
     public List<WebElement> prices;
+    final List<Product> products = new ArrayList<>();
 
     @FindBy(xpath = "//div[@class='cart-items__product-name']")
     public List<WebElement> names;
@@ -26,14 +27,15 @@ public class BasketPage extends BasePage {
     @FindBy(xpath = "//div[@class='cart-items__product']")
     public WebElement items;
 
+    @FindBy(xpath = "//span[@class='restore-last-removed']")
+    WebElement returnItemButton;
+
+    @FindBy(xpath = "//span[@class='price__current']")
+    WebElement finalPrice;
+
     public void delete(String name) {
-        WebElement deleteButton;
-        WebElement names = items.findElement(By.xpath("//div[@class='cart-items__product-name']//a[contains(text(),'" + name + "')]"));
-        WebElement parentOfNamesAndDelete = items.findElement(By.xpath("//div[@class='cart-items__product-name']//a[contains(text(),'" + name + "')]/parent::div"));
-        if (names.isDisplayed()) {
-            deleteButton = parentOfNamesAndDelete.findElement(By.xpath("//div[@class='cart-items__product']//div[@class='cart-items__product-price']//span[@class='price__current' and contains(text(),'34')]"));
-            deleteButton.click();
-        }
+        WebElement deleteButton = items.findElement(By.xpath("//div[@class='cart-items__product-name']//a[contains(text(),'" + name + "')]/../../../../../..//button[contains(text(),'Удалить')]"));
+        deleteButton.click();
     }
 
     public BasketPage(WebDriver driver) {
@@ -42,7 +44,6 @@ public class BasketPage extends BasePage {
     }
 
     public List<Product> getProducts() {
-        final List<Product> products = new ArrayList<>();
         for (int i = 0; i < prices.size(); i++) {
             final Product product = new Product();
             product.setName(names.get(i).getText());
@@ -51,4 +52,14 @@ public class BasketPage extends BasePage {
         }
         return products;
     }
+
+    public String findElenemtNameByXpath(String name) {
+        return "//div[@class='cart-items__product']//div[@class='cart-items__product-name']//a[contains(text(),'" + name + "')]";
+    }
+
+    public void addMoreItems(String name) {
+        WebElement addButton = items.findElement(By.xpath("//div[@class='cart-items__product-name']//a[contains(text(),'" + name + "')]/../../../../../..//i[(@class='count-buttons__icon-plus')]"));
+        addButton.click();
+    }
+
 }

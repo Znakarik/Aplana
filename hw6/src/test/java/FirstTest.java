@@ -13,14 +13,14 @@ public class FirstTest extends BaseTest {
 
     @Test
     public void PagesTest() throws InterruptedException {
-        final WebDriverWait wait = new WebDriverWait(driver, 5);
+        final WebDriverWait wait = new WebDriverWait(driver, 30);
 
-        // 1. открыть dns-shop
+        /** 1. открыть dns-shop */
         driver.navigate().to(properties.getProperty("app.url"));
         final MainPage mainPage = new MainPage(driver);
-        // 2. в поиске найти playstation
+        /** 2. в поиске найти playstation */
         mainPage.searchField.sendKeys("playstation");
-        // 3. кликнуть по playstation 4 slim black
+        /** 3. кликнуть по playstation 4 slim black */
         mainPage.playstation.click();
 
         final SearchPage searchPage = new SearchPage(driver);
@@ -29,7 +29,7 @@ public class FirstTest extends BaseTest {
         /** Кликаем на title товара и переходим на ItemPage */
         searchPage.itemTitle.click();
 
-        // 4. запомнить цену
+        /** 4. запомнить цену */
         final ItemPage itemPage = new ItemPage(driver);
 
         final Product playstation1 = new Product();
@@ -37,15 +37,15 @@ public class FirstTest extends BaseTest {
         playstation1.setPrice(NumberUtil.parseInt(itemPage.price.getText()));
         playstation1.setName(itemPage.name.getText());
 
-//        5. Доп.гарантия - выбрать 2 года
+        /** 5. Доп.гарантия - выбрать 2 года */
         itemPage.selectGuarantee.sendKeys("2");
 
-//        6. дождаться изменения цены и запомнить цену с гарантией
+        /** 6. дождаться изменения цены и запомнить цену с гарантией */
         final Product playstation2 = new Product();
         playstation2.setPrice(NumberUtil.parseInt(itemPage.price.getText()));
         playstation2.setName(itemPage.name.getText());
 
-//        7. Нажать Купить
+        /** 7. Нажать Купить */
         itemPage.buyButton.click();
 
         Integer playstationPrice3 = NumberUtil.parseInt(itemPage.price.getText());
@@ -53,23 +53,24 @@ public class FirstTest extends BaseTest {
 //        Assert.assertEquals(playstationPrice1, playstationPrice2);
 
 //        System.out.printf("Цена на плейстейшн из выдачи поиска: %s\nЦена после добавления в корзину: %s\nЦена после изменения условий по гарантии: %s\n", playstationPrice1, playstationPrice2, playstationPrice3);
-//        8. выполнить поиск Detroit
+        /** 8. выполнить поиск Detroit */
         mainPage.searchField.sendKeys("Detroit\n");
 
-//        9. запомнить цену
+        /** 9. запомнить цену */
         final Product detroid = new Product();
         detroid.setPrice(NumberUtil.parseInt(itemPage.price.getText()));
         detroid.setName(itemPage.name.getText());
 
-//        10. нажать купить
+        /** 10. нажать купить */
         itemPage.buyButton.click();
 
-//        11. проверить что цена корзины стала равна сумме покупок
+        /** 11. проверить что цена корзины стала равна сумме покупок */
         Thread.sleep(3000); // ждем, пока динамический обьект цены корзины отрендерится
-//        11. Проверить что цена корзины стала равна сумме покупок
-//        Assert.assertEquals(NumberUtil.parseInt(itemPage.basketPrice.getText()), playstationPrice2 + detroiPrice);
+        /** 11. Проверить что цена корзины стала равна сумме покупок */
+        int basketPrice1 = NumberUtil.parseInt(itemPage.basketPrice.getText());
+        Assert.assertEquals(basketPrice1, playstation2.getPrice() + detroid.getPrice(), "Prices are not the sane");
 
-//        12. перейти в корзину
+        /** 12. перейти в корзину */
         itemPage.basketPrice.click();
 
         final BasketPage basketPage = new BasketPage(driver);
@@ -81,7 +82,7 @@ public class FirstTest extends BaseTest {
 
         Assert.assertEquals(productsFromPages.size(), productsFromBasket.size());
 
-        // 13. проверить, что для приставки выбрана гарантия на 2 года
+        /** 13. проверить, что для приставки выбрана гарантия на 2 года */
         /** Узнаем стоимость гарантии */
         playstation2.setGuarantee(playstation2.getPrice() - playstation1.getPrice());
         /** Проверяем наличие элемента гарантии на странице */
@@ -89,20 +90,29 @@ public class FirstTest extends BaseTest {
         /** Смотрим, есть ли на странице наши обьекты */
         Assert.assertTrue(productsFromBasket.contains(playstation1));
         Assert.assertTrue(productsFromBasket.contains(detroid));
-        // 14. проверить цену каждого из товаров и сумму
+        /** 14. проверить цену каждого из товаров и сумму */
         Assert.assertTrue(productsFromBasket.containsAll(productsFromPages));
 
         driver.findElements(By.cssSelector(".cart-items__product-name-link")).forEach(element -> System.out.println(element.getText()));
-//        15. удалить из корзины Detroit
-//        basketPage.delete(detroid.getName());
-        //div[@class='cart-items__product-name']//a[contains(text(),'приставка')]/parent::div[@class='cart-items__product-name']
+        int finalBasketPrice1 = NumberUtil.parseInt(basketPage.getFinalPrice().getText());
+        /**15. удалить из корзины Detroit */
+        basketPage.delete(detroid.getName());
 
+        /** 16. проверить что Detroit нет больше в корзине и что сумма уменьшилась на цену Detroit */
+        Thread.sleep(2000);
+        Assert.assertTrue(driver.findElements(By.xpath(basketPage.findElenemtNameByXpath(detroid.getName()))).size() < 1);
+        int basketPrice = NumberUtil.parseInt(itemPage.basketPrice.getText());
+        Assert.assertEquals((basketPrice1 - detroid.getPrice()), basketPrice);
 
-//        16. проверить что Detroit нет больше в корзине и что сумма уменьшилась на цену Detroit
-//        17. добавить еще 2 playstation (кнопкой +) и проверить что сумма верна (равна трем ценам playstation)
-//        18. нажать вернуть удаленный товар, проверить что Detroit появился в корзине и сумма увеличилась на его значение
-
-        //div[@class='cart-items__product-thumbnail cart-items__product-thumbnail_product']//div[@class='cart-items__product-name']//a[contains(text(),'приставка')]
-
+        /** 17. добавить еще 2 playstation (кнопкой +) и проверить что сумма верна (равна трем ценам playstation) */
+        basketPage.addMoreItems(playstation2.getName());
+        basketPage.addMoreItems(playstation2.getName());
+        int finalBasketPrice2 = NumberUtil.parseInt(basketPage.getFinalPrice().getText());
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//span[contains(text(),'92 037')]"))));
+        Assert.assertEquals((playstation2.getPrice() * 3), finalBasketPrice2);
+        /** 18. нажать вернуть удаленный товар, проверить что Detroit появился в корзине и сумма увеличилась на его значение */
+        basketPage.getReturnItemButton().click();
+        int finalBasketPrice3 = NumberUtil.parseInt(basketPage.getFinalPrice().getText());
+        Assert.assertEquals((int) detroid.getPrice(), finalBasketPrice3 - finalBasketPrice1);
     }
 }
