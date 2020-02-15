@@ -1,9 +1,15 @@
+package java;
+
+import main.java.pages.BasketPage;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pages.*;
+import pages.MainPage;
+import pages.SearchPage;
+import pages.ItemPage;
+import pages.Product;
 import util.NumberUtil;
 
 import java.util.Arrays;
@@ -49,10 +55,7 @@ public class FirstTest extends BaseTest {
         itemPage.buyButton.click();
 
         Integer playstationPrice3 = NumberUtil.parseInt(itemPage.price.getText());
-//        System.out.println(playstationPrice2);
-//        Assert.assertEquals(playstationPrice1, playstationPrice2);
 
-//        System.out.printf("Цена на плейстейшн из выдачи поиска: %s\nЦена после добавления в корзину: %s\nЦена после изменения условий по гарантии: %s\n", playstationPrice1, playstationPrice2, playstationPrice3);
         /** 8. выполнить поиск Detroit */
         mainPage.searchField.sendKeys("Detroit\n");
 

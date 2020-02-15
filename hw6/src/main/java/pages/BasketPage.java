@@ -1,4 +1,4 @@
-package pages;
+package main.java.pages;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -11,12 +11,12 @@ import util.NumberUtil;
 import java.util.*;
 
 @Getter
-public class BasketPage extends BasePage {
+public class BasketPage extends pages.BasePage {
 //        @FindBy(xpath = "//div[(@class='cart-items__product-thumbnail cart-items__product-thumbnail_product')]")
 
     @FindBy(xpath = "//div[contains(@class,'cart-items__products')]//span[contains(@class,'price__current')]")
     public List<WebElement> prices;
-    final List<Product> products = new ArrayList<>();
+    final List<pages.Product> products = new ArrayList<>();
 
     @FindBy(xpath = "//div[@class='cart-items__product-name']")
     public List<WebElement> names;
@@ -43,9 +43,9 @@ public class BasketPage extends BasePage {
         this.driver = driver;
     }
 
-    public List<Product> getProducts() {
+    public List<pages.Product> getProducts() {
         for (int i = 0; i < prices.size(); i++) {
-            final Product product = new Product();
+            final pages.Product product = new pages.Product();
             product.setName(names.get(i).getText());
             product.setPrice(NumberUtil.parseInt(prices.get(i).getText()));
             products.add(product);

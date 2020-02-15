@@ -1,4 +1,4 @@
-package ru.znakarik;
+package ru.znakarik.util;
 
 import java.io.File;
 import java.io.FileInputStream;
